@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="shortcut icon" type="image/jpeg" href="/images/Home screen Photo.jpeg">
+    <link rel="shortcut icon" type="image/jpeg" href="Home screen Photo.jpeg">
     <title>PENGVERSE | Official Links & Shop</title>
 
     <!-- Tailwind CSS -->
@@ -38,11 +38,16 @@
     </script>
 
     <style>
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             color: #111111;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
             font-family: 'Space Grotesk', sans-serif;
+            background-color: #ffffff;
         }
 
         /* Animated Pale White Background */
@@ -79,9 +84,12 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
-        /* Hover / Select state for White Glass */
         .link-card:hover, .link-card:focus {
             background: rgba(255, 255, 255, 0.85);
             border-color: #ffffff;
@@ -89,10 +97,10 @@
             box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.1);
         }
 
-        /* View Transitions */
         .view-section {
             transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        
         .view-hidden {
             opacity: 0;
             pointer-events: none;
@@ -101,16 +109,21 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            visibility: hidden;
+            height: 0;
+            overflow: hidden;
         }
+        
         .view-active {
             opacity: 1;
             pointer-events: auto;
             transform: scale(1) translateY(0);
             position: relative;
+            visibility: visible;
+            height: auto;
+            overflow: visible;
         }
 
-        /* Utilities */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -131,7 +144,6 @@
             gap: 0.5rem;
         }
         
-        /* Custom scrollbar for filter pills */
         .filter-scroll::-webkit-scrollbar { height: 4px; }
         .filter-scroll::-webkit-scrollbar-track { background: transparent; }
         .filter-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 4px; }
@@ -145,11 +157,12 @@
             border-color: #030303;
         }
 
-        /* ── Product Card ── */
         .product-card {
             transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
             width: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.7);
         }
         .product-card:hover {
             box-shadow: 0 20px 40px rgba(0,0,0,0.08);
@@ -179,7 +192,6 @@
             transform: scale(1.08);
         }
 
-        /* Badge for Cart */
         .cart-badge {
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -187,7 +199,6 @@
             transform: scale(1.4);
         }
 
-        /* Toast Container */
         #toast-container {
             position: fixed;
             bottom: 32px;
@@ -226,113 +237,118 @@
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col items-center selection:bg-black selection:text-white relative w-full">
+<body class="relative w-full min-h-screen selection:bg-black selection:text-white">
     
     <div class="bg-animated"></div>
     <div id="toast-container"></div>
 
     <!-- WRAPPER -->
-    <div class="relative w-full z-10 min-h-screen overflow-hidden">
+    <div class="relative w-full z-10 min-h-[100dvh] flex flex-col items-center">
         
         <!-- ============================================== -->
         <!-- VIEW 1: LINKS DIRECTORY -->
         <!-- ============================================== -->
-        <main id="view-links" class="view-section view-active fixed inset-0 w-full h-[100dvh] flex items-center justify-center">
-            <div class="w-full max-w-[420px] h-full flex flex-col p-6 overflow-y-auto pb-10 no-scrollbar">
-                <div class="flex flex-col items-center w-full min-h-full py-4 justify-start">
-                    <div class="grow"></div>
-                    
-                    <header class="flex flex-col items-center mb-10 w-full mt-4 animate-fade-in-up">
-                        <!-- Profile Picture -->
-                        <div class="mb-6 group cursor-pointer relative">
-                            <!-- Using a stylized placeholder for the preview -->
-                            <div class="w-32 h-32 rounded-full bg-white flex items-center justify-center overflow-hidden border-4 border-white shadow-2xl transition-transform duration-500 group-hover:scale-105">
-                                <img 
-                                    src="https://placehold.co/400x400/0F0F0F/FFFFFF?text=PENG" 
-                                    alt="Pengverse Profile" 
-                                    class="w-full h-full object-cover transition-all duration-500"
-                                >
-                            </div>
-                        </div>
+        <main id="view-links" class="view-section view-active w-full min-h-[100dvh] flex items-center justify-center relative px-4 py-16">
+            
+            <!-- Superheroes Right Edge Graphic -->
+            <div class="fixed top-0 right-0 h-full pointer-events-none z-0 flex items-center justify-end overflow-visible">
+                <img 
+                    src="Superheros Transparent.png" 
+                    alt="Pengverse Superheroes" 
+                    class="h-[75%] md:h-[90%] lg:h-[95%] w-auto object-contain object-right opacity-30 sm:opacity-70 lg:opacity-100 drop-shadow-2xl m-0 p-0 translate-x-[40px] md:translate-x-[56px] lg:translate-x-[64px]"
+                >
+            </div>
 
-                        <h1 class="text-6xl sm:text-7xl font-hero tracking-widest text-center mb-1 text-black drop-shadow-sm">
-                            PENGVERSE<span class="text-brand-orange">.</span>
-                        </h1>
-                        <p class="text-black/60 font-semibold tracking-[0.2em] uppercase text-xs text-center">
-                            Official Store & Links
-                        </p>
-
-                        <!-- Social Icons Row -->
-                        <div class="flex gap-5 mt-6">
-                            <a href="https://www.instagram.com/peng_verse?igsh=ajd5OXh4eDJ2MzF2" target="_blank" onclick="showToast('Redirecting to Instagram...', true, 'fab fa-instagram'); return true;" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:scale-110 transition-all shadow-sm">
-                                <i class="fab fa-instagram text-xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-transparent bg-clip-text"></i>
-                            </a>
-                            <a href="https://www.facebook.com/share/14bVj8z5v6r/" target="_blank" onclick="showToast('Redirecting to Facebook...', true, 'fab fa-facebook'); return true;" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:scale-110 transition-all shadow-sm">
-                                <i class="fab fa-facebook text-xl text-[#1877F2]"></i>
-                            </a>
-                            <a href="https://youtube.com/@pengverse?si=2bwOXQag-bWbCemV" target="_blank" onclick="showToast('Redirecting to YouTube...', true, 'fab fa-youtube'); return true;" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:scale-110 transition-all shadow-sm">
-                                <i class="fab fa-youtube text-xl text-[#FF0000]"></i>
-                            </a>
-                        </div>
-                    </header>
-
-                    <div class="w-full flex flex-col gap-4 mb-8 items-center animate-fade-in-up" style="animation-delay: 0.15s;">
-                        <div class="w-full flex flex-col gap-4 items-center max-w-[340px]">
-                            
-                            <!-- Main Store Button -->
-                            <button onclick="openShop('Store')" class="link-card rounded-xl p-4 w-full flex items-center justify-between group outline-none">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-black/5 flex items-center justify-center group-hover:bg-white transition-colors">
-                                        <i class="fas fa-store link-icon text-sm"></i>
-                                    </div>
-                                    <span class="font-bold text-sm tracking-widest uppercase">Store</span>
-                                </div>
-                                <i class="fas fa-arrow-right link-icon opacity-40 group-hover:translate-x-1 group-hover:opacity-100 transition-all"></i>
-                            </button>
-
-                            <!-- Wallpapers Button -->
-                            <button onclick="openShop('Peng Wallpapers')" class="link-card rounded-xl p-4 w-full flex items-center justify-between group outline-none">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-black/5 flex items-center justify-center group-hover:bg-white transition-colors">
-                                        <i class="fas fa-image link-icon text-sm"></i>
-                                    </div>
-                                    <span class="font-bold text-sm tracking-widest uppercase">Wallpapers</span>
-                                </div>
-                                <i class="fas fa-arrow-right link-icon opacity-40 group-hover:translate-x-1 group-hover:opacity-100 transition-all"></i>
-                            </button>
-
-                            <!-- Support Button -->
-                            <a href="https://donate.stripe.com/aFa8wO3VU2b7c57gZg1ck08" target="_blank" onclick="showToast('Thank you for supporting Peng!', true, 'fas fa-heart text-brand-orange'); return true;" class="link-card rounded-2xl p-5 w-full flex items-center justify-between group outline-none bg-brand-orange/10 border border-brand-orange/20 hover:bg-brand-orange/20 hover:border-brand-orange/40 backdrop-blur-md mt-2">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 rounded-full bg-brand-orange/20 flex items-center justify-center group-hover:bg-brand-orange/30 transition-colors">
-                                        <i class="fas fa-fish text-brand-orange text-base drop-shadow-sm"></i>
-                                    </div>
-                                    <span class="font-bold text-[0.95rem] tracking-widest uppercase text-black">Feed Peng</span>
-                                </div>
-                                <i class="fas fa-heart text-brand-orange opacity-70 group-hover:scale-125 group-hover:opacity-100 transition-all duration-300"></i>
-                            </a>
-
-                        </div>
+            <!-- Content Container -->
+            <div class="w-full max-w-[420px] flex flex-col items-center z-10 relative">
+                
+                <header class="flex flex-col items-center mb-10 w-full animate-fade-in-up">
+                    <!-- Profile Picture -->
+                    <div class="mb-2 group cursor-pointer relative flex justify-center w-full -mb-8 z-10">
+                        <img 
+                            src="Spy transparent logo.png" 
+                            alt="Pengverse Profile" 
+                            class="w-48 sm:w-56 h-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                        >
                     </div>
-                    <div class="grow"></div>
+
+                    <h1 class="text-6xl sm:text-7xl font-hero tracking-widest text-center mb-1 text-black drop-shadow-sm">
+                        PENGVERSE<span class="text-brand-orange">.</span>
+                    </h1>
+                    <p class="text-black/60 font-semibold tracking-[0.2em] uppercase text-xs text-center">
+                        Official Store & Links
+                    </p>
+
+                    <!-- Social Icons Row -->
+                    <div class="flex gap-5 mt-6">
+                        <a href="https://www.instagram.com/peng_verse?igsh=ajd5OXh4eDJ2MzF2" target="_blank" onclick="showToast('Redirecting to Instagram...', true, 'fab fa-instagram'); return true;" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:scale-110 transition-all shadow-sm">
+                            <i class="fab fa-instagram text-xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-transparent bg-clip-text"></i>
+                        </a>
+                        <a href="https://www.facebook.com/share/14bVj8z5v6r/" target="_blank" onclick="showToast('Redirecting to Facebook...', true, 'fab fa-facebook'); return true;" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:scale-110 transition-all shadow-sm">
+                            <i class="fab fa-facebook text-xl text-[#1877F2]"></i>
+                        </a>
+                        <a href="https://youtube.com/@pengverse?si=2bwOXQag-bWbCemV" target="_blank" onclick="showToast('Redirecting to YouTube...', true, 'fab fa-youtube'); return true;" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:scale-110 transition-all shadow-sm">
+                            <i class="fab fa-youtube text-xl text-[#FF0000]"></i>
+                        </a>
+                    </div>
+                </header>
+
+                <div class="w-full flex flex-col gap-4 items-center animate-fade-in-up mb-16" style="animation-delay: 0.15s;">
+                    <div class="w-full flex flex-col gap-4 items-center max-w-[340px]">
+                        
+                        <!-- Main Store Button -->
+                        <button onclick="openShop('Store')" class="link-card rounded-xl p-4 w-full flex items-center justify-between group outline-none">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-black/5 flex items-center justify-center group-hover:bg-white transition-colors">
+                                    <i class="fas fa-store link-icon text-sm text-black"></i>
+                                </div>
+                                <span class="font-bold text-sm tracking-widest uppercase text-black">Store</span>
+                            </div>
+                            <i class="fas fa-arrow-right link-icon text-black opacity-40 group-hover:translate-x-1 group-hover:opacity-100 transition-all"></i>
+                        </button>
+
+                        <!-- Wallpapers Button -->
+                        <button onclick="openShop('Peng Wallpapers')" class="link-card rounded-xl p-4 w-full flex items-center justify-between group outline-none">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-black/5 flex items-center justify-center group-hover:bg-white transition-colors">
+                                    <i class="fas fa-image link-icon text-sm text-black"></i>
+                                </div>
+                                <span class="font-bold text-sm tracking-widest uppercase text-black">Wallpapers</span>
+                            </div>
+                            <i class="fas fa-arrow-right link-icon text-black opacity-40 group-hover:translate-x-1 group-hover:opacity-100 transition-all"></i>
+                        </button>
+
+                        <!-- Support Button -->
+                        <a href="https://donate.stripe.com/aFa8wO3VU2b7c57gZg1ck08" target="_blank" onclick="showToast('Thank you for supporting Peng!', true, 'fas fa-heart text-brand-orange'); return true;" class="link-card rounded-2xl p-5 w-full flex items-center justify-between group outline-none bg-brand-orange/10 border-brand-orange/20 hover:bg-brand-orange/20 hover:border-brand-orange/40 mt-2">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-orange/20 flex items-center justify-center group-hover:bg-brand-orange/30 transition-colors">
+                                    <i class="fas fa-fish text-brand-orange text-base drop-shadow-sm"></i>
+                                </div>
+                                <span class="font-bold text-[0.95rem] tracking-widest uppercase text-black">Feed Peng</span>
+                            </div>
+                            <i class="fas fa-heart text-brand-orange opacity-70 group-hover:scale-125 group-hover:opacity-100 transition-all duration-300"></i>
+                        </a>
+
+                    </div>
                 </div>
+                
             </div>
         </main>
 
         <!-- ============================================== -->
         <!-- VIEW 2: DYNAMIC SHOP PAGE -->
         <!-- ============================================== -->
-        <main id="view-shop" class="view-section view-hidden w-full h-[100dvh] overflow-y-auto no-scrollbar absolute top-0 left-0 z-20">
-            <div class="w-full max-w-[1200px] mx-auto flex flex-col p-4 sm:p-8 min-h-full">
+        <main id="view-shop" class="view-section view-hidden w-full min-h-[100dvh] absolute top-0 left-0 z-20">
+            <div class="w-full max-w-[1400px] mx-auto flex flex-col p-4 sm:p-8 pb-32">
                 
                 <!-- Shop Header -->
-                <nav class="shop-nav glass-panel py-4 mb-6 sticky top-4 rounded-3xl z-40 px-5 shadow-sm border border-white/80">
+                <nav class="shop-nav glass-panel py-4 mb-6 sticky top-4 rounded-3xl z-40 px-5 shadow-sm border border-white/80 bg-white/70">
                     <button onclick="closeShop()" class="justify-self-start flex items-center gap-2 text-black/80 hover:text-black transition-all group bg-white/50 border border-black/10 px-4 py-2.5 rounded-full hover:bg-white">
                         <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform text-sm"></i>
                         <span class="font-bold tracking-widest uppercase text-xs hidden sm:inline">Back</span>
                     </button>
                     
-                    <h2 id="shop-title" class="shop-nav-title font-hero tracking-widest text-black drop-shadow-sm uppercase">
+                    <h2 id="shop-title" class="shop-nav-title font-hero tracking-widest text-black drop-shadow-sm uppercase text-center">
                         STORE
                     </h2>
                     
@@ -348,7 +364,8 @@
                     <!-- Pills go here -->
                 </div>
 
-                <div id="shop-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 gap-y-12 pb-32 justify-items-center w-full">
+                <!-- Desktop Grid Layout -->
+                <div id="shop-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 gap-y-12 justify-items-center w-full">
                 <!-- Injected via JS -->
                 </div>  
             </div>
@@ -357,77 +374,52 @@
     </div>
 
     <script>
-        // Database with stylized placeholder images for immediate visual impact
         const productsDB = [
-            // APPAREL
-            { id: 1, category: "Apparel", type: "Tee", name: "Peng Beige Tee", img: "images/Beige Tshirt.png", fit: "cover", comingSoon: true },
-            { id: 2, category: "Apparel", type: "Tee", name: "Peng Black Tee", img: "images/Black Tshirt.png", fit: "cover", comingSoon: true },
-            { id: 3, category: "Apparel", type: "Hoodie", name: "Classic Hoodie", comingSoon: true, img: "images/Hoodie.png", bg: "#F8F8F8" },
-
-            // PLUSHIES
-            { category: "Peng Plushies", name: "Classic 8\" Plushy", comingSoon: true, img: "images/Plushie Toy.jpeg", bg: "#FEFEFE", ratio: "4/4"  },
-
-            // DIGITAL - WALLPAPERS
-            { id: 8, category: "Peng Wallpapers", type: "Digital", name: "Peng Black", img: "images/Peng black.png", fit: "cover", comingSoon: true },
-            { id: 9, category: "Peng Wallpapers", type: "Digital", name: "Don't Touch My Phone", img: "images/Peng_Don't_touch_my_phone.webp", fit: "cover", comingSoon: true },
-            { id: 10, category: "Peng Wallpapers", type: "Digital", name: "Locked", img: "images/Peng locked.webp", fit: "cover", comingSoon: true },
-            { id: 11, category: "Peng Wallpapers", type: "Digital", name: "Superheroes", img: "images/Peng superheros.png", fit: "cover", comingSoon: true },
-            { id: 12, category: "Peng Wallpapers", type: "Digital", name: "Inevitable Thanos", img: "images/Peng Thanos.webp", fit: "cover", comingSoon: true },
-            { id: 13, category: "Peng Wallpapers", type: "Digital", name: "Chill Vibes", img: "images/Peng_chill_walpaper.png", fit: "cover", comingSoon: true },
-            { id: 14, category: "Peng Wallpapers", type: "Digital", name: "Demon Night", img: "images/Peng_Demon_walpaper.png", fit: "cover", comingSoon: true },
-            { id: 15, category: "Peng Wallpapers", type: "Digital", name: "World Cup 2026", img: "images/Peng_football_walpaper.png", fit: "cover", comingSoon: true },
-            { id: 16, category: "Peng Wallpapers", type: "Digital", name: "Not in the Mood", img: "images/Peng_stop_walpaper.png", fit: "cover", comingSoon: true },
-            { id: 17, category: "Peng Wallpapers", type: "Digital", name: "You Suck Anyway", img: "images/Picsart_26-06-19_00-41-35-626.jpg.jpeg", fit: "cover", comingSoon: true }
+            { id: 1, category: "Apparel", type: "Tee", name: "Peng Beige Tee", img: "Beige Tshirt.png", fit: "cover", comingSoon: true },
+            { id: 2, category: "Apparel", type: "Tee", name: "Peng Black Tee", img: "Black Tshirt.png", fit: "cover", comingSoon: true },
+            { id: 3, category: "Apparel", type: "Hoodie", name: "Classic Hoodie", comingSoon: true, img: "Hoodie.png", bg: "#F8F8F8" },
+            { category: "Peng Plushies", name: "Classic 8\" Plushy", comingSoon: true, img: "Plushie Toy.jpeg", bg: "#FEFEFE", ratio: "4/4"  },
+            { id: 8, category: "Peng Wallpapers", type: "Digital", name: "Peng Black", img: "Peng black.png", fit: "contain", bg: "transparent", comingSoon: false },
+            { id: 9, category: "Peng Wallpapers", type: "Digital", name: "Don't Touch My Phone", img: "Peng_Don't_touch_my_phone.webp", fit: "cover", comingSoon: false },
+            { id: 10, category: "Peng Wallpapers", type: "Digital", name: "Locked", img: "Peng locked.webp", fit: "cover", comingSoon: false },
+            { id: 11, category: "Peng Wallpapers", type: "Digital", name: "Superheroes", img: "Peng superheros.png", fit: "cover", comingSoon: false },
+            { id: 12, category: "Peng Wallpapers", type: "Digital", name: "Inevitable Thanos", img: "Peng Thanos.webp", fit: "cover", comingSoon: false },
+            { id: 13, category: "Peng Wallpapers", type: "Digital", name: "Chill Vibes", img: "Peng_chill_walpaper.png", fit: "cover", comingSoon: false },
+            { id: 14, category: "Peng Wallpapers", type: "Digital", name: "Demon Night", img: "Peng_Demon_walpaper.png", fit: "cover", comingSoon: false },
+            { id: 15, category: "Peng Wallpapers", type: "Digital", name: "World Cup 2026", img: "Peng_football_walpaper.png", fit: "cover", comingSoon: false },
+            { id: 16, category: "Peng Wallpapers", type: "Digital", name: "Not in the Mood", img: "Peng_stop_walpaper.png", fit: "cover", comingSoon: false },
+            { id: 17, category: "Peng Wallpapers", type: "Digital", name: "You Suck Anyway", img: "Picsart_26-06-19_00-41-35-626.jpg.jpeg", fit: "cover", comingSoon: false }
         ];
 
         let currentCategory = 'Store';
         let currentFilter = 'All';
         let cartCount = 0;
 
-        // Custom Toast Notification System
         function showToast(message, isSuccess = true, customIcon = null) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = 'custom-toast';
             
-            let iconHtml = '';
-            if (customIcon) {
-                iconHtml = `<i class="${customIcon}"></i>`;
-            } else {
-                iconHtml = isSuccess ? '<i class="fas fa-check-circle text-green-400"></i>' : '<i class="fas fa-info-circle text-white/70"></i>';
-            }
-
+            let iconHtml = customIcon ? `<i class="${customIcon}"></i>` : (isSuccess ? '<i class="fas fa-check-circle text-green-400"></i>' : '<i class="fas fa-info-circle text-white/70"></i>');
             toast.innerHTML = `${iconHtml} <span>${message}</span>`;
             
             container.appendChild(toast);
-            
-            // Trigger animation
             setTimeout(() => toast.classList.add('show'), 10);
-            
-            // Remove after delay
             setTimeout(() => {
                 toast.classList.remove('show');
                 setTimeout(() => toast.remove(), 400);
             }, 3000);
         }
 
-        // Handle Add to Cart logic
         function updateCart() {
             cartCount++;
             const badge = document.getElementById('cart-badge');
             badge.innerText = cartCount;
-            
-            if (cartCount === 1) {
-                badge.classList.remove('opacity-0');
-            }
-            
-            // Pop animation
+            if (cartCount === 1) badge.classList.remove('opacity-0');
             badge.classList.add('pop');
             setTimeout(() => badge.classList.remove('pop'), 300);
         }
 
-
-        // Product Click Handler
         function handleProductClick(productName, isDownload, isComingSoon = false, imgUrl = '') {
             if (isComingSoon) {
                 showToast(`${productName} drops soon!`, false, 'fas fa-clock text-white');
@@ -455,10 +447,8 @@
                 filterContainer.classList.add('hidden');
                 return;
             }
-
             filterContainer.classList.remove('hidden');
             const tabs = ['All', ...categories];
-            
             filterContainer.innerHTML = tabs.map(tab => `
                 <button onclick="setFilter('${tab}')" 
                         class="filter-btn shrink-0 px-5 py-2 rounded-full border border-black/10 text-sm font-semibold tracking-wide ${tab === currentFilter ? 'active' : 'bg-white/60 text-black/60 hover:bg-white'} backdrop-blur-md">
@@ -470,8 +460,6 @@
         function setFilter(filterTarget) {
             currentFilter = filterTarget;
             renderProducts();
-            
-            // Update active state on buttons visually without re-rendering them
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 if(btn.innerText.trim() === filterTarget) {
                     btn.classList.add('active', 'bg-[#030303]', 'text-white');
@@ -485,57 +473,23 @@
 
         function renderProducts() {
             const grid = document.getElementById('shop-grid');
-            let displayProducts = productsDB;
-
-            // Step 1: Filter by Main View (Store vs Wallpapers)
-            if (currentCategory === 'Store') {
-                displayProducts = displayProducts.filter(p => p.category !== 'Peng Wallpapers');
-            } else {
-                displayProducts = displayProducts.filter(p => p.category === currentCategory);
-            }
-
-            // Step 2: Filter by Sub-category pills if in Store view
-            if (currentCategory === 'Store' && currentFilter !== 'All') {
-                displayProducts = displayProducts.filter(p => p.category === currentFilter);
-            }
-
-            // Render
+            let displayProducts = productsDB.filter(p => currentCategory === 'Store' ? p.category !== 'Peng Wallpapers' : p.category === currentCategory);
+            if (currentCategory === 'Store' && currentFilter !== 'All') displayProducts = displayProducts.filter(p => p.category === currentFilter);
             grid.innerHTML = displayProducts.map((p, index) => {
                 const isDownload = p.category === 'Peng Wallpapers';
                 const isComingSoon = p.comingSoon ? 'true' : 'false';
-                // Staggered animation delay based on index
-                const delay = index * 0.05;
-                
                 return `
-                <div class="product-card glass-panel rounded-2xl overflow-hidden flex flex-col animate-fade-in-up" 
-                     style="animation-delay: ${delay}s;">
-                    
+                <div class="product-card glass-panel rounded-2xl overflow-hidden flex flex-col animate-fade-in-up" style="animation-delay: ${index * 0.05}s;">
                     <div class="card-img-wrap shrink-0" style="aspect-ratio: ${isDownload ? '9/16' : (p.ratio || '4/2.8')}; background: ${p.bg || (isDownload ? 'transparent' : '#FFFFFF')}; border-radius: 0; margin-bottom: 0;">
-                        <img src="${p.img}" alt="${p.name}" loading="lazy" class="w-full h-full object-contain" style="${p.fit ? `object-fit: ${p.fit};` : ''}">
+                        <img src="${p.img}" alt="${p.name}" loading="lazy" class="w-full h-full object-contain ${p.bg === 'transparent' ? 'mix-blend-multiply' : ''}" style="${p.fit ? `object-fit: ${p.fit};` : ''}">
                     </div>
-                    
                     <div class="flex flex-col grow">
                         <div class="flex items-center justify-between px-3 pt-3 pb-2">
                             <h3 class="font-semibold text-sm leading-tight text-black">${p.name}</h3>
-                            ${p.comingSoon ? 
-                                `<span class="font-semibold text-xs text-black/40 ml-2 shrink-0">Soon</span>` : 
-                                (p.price ? 
-                                `<span class="font-bold text-sm text-black ml-2 shrink-0">$${p.price.toFixed(2)}</span>` : 
-                                `<span class="font-bold text-xs text-brand-orange bg-brand-orange/10 px-2 py-0.5 rounded-md ml-2 shrink-0">Free</span>`)
-                            }
+                            ${p.comingSoon ? `<span class="font-semibold text-xs text-black/40 ml-2 shrink-0">Soon</span>` : (p.price ? `<span class="font-bold text-sm text-black ml-2 shrink-0">$${p.price.toFixed(2)}</span>` : `<span class="font-bold text-xs text-brand-orange bg-brand-orange/10 px-2 py-0.5 rounded-md ml-2 shrink-0">Free</span>`)}
                         </div>
-                        
                         <div class="px-3 pb-3 mt-auto flex items-center justify-center gap-2">
-                            ${p.comingSoon ? 
-                                `<button disabled class="w-full py-2 bg-black/5 text-black/40 font-semibold text-sm rounded-xl cursor-not-allowed">Coming Soon</button>` :
-                                (isDownload ?
-                                `<button onclick="handleProductClick('${p.name}', ${isDownload}, ${isComingSoon}, '${p.img}')" class="w-full py-2 bg-brand-orange/10 hover:bg-brand-orange text-brand-orange hover:text-white transition-colors font-bold text-sm rounded-xl flex items-center justify-center gap-2">
-                                    <i class="fas fa-download"></i> Download
-                                </button>` :
-                                `<button onclick="handleProductClick('${p.name}', ${isDownload}, ${isComingSoon}, '${p.img}')" class="w-full py-2 bg-black hover:bg-black/80 text-white transition-colors font-bold text-sm rounded-xl flex items-center justify-center gap-2">
-                                    <i class="fas fa-plus"></i> Add to Cart
-                                </button>`)
-                            }
+                            ${p.comingSoon ? `<button disabled class="w-full py-2 bg-black/5 text-black/40 font-semibold text-sm rounded-xl cursor-not-allowed">Coming Soon</button>` : (isDownload ? `<button onclick="handleProductClick('${p.name}', ${isDownload}, ${isComingSoon}, '${p.img}')" class="w-full py-2 bg-brand-orange/10 hover:bg-brand-orange text-brand-orange hover:text-white transition-colors font-bold text-sm rounded-xl flex items-center justify-center gap-2"><i class="fas fa-download"></i> Download</button>` : `<button onclick="handleProductClick('${p.name}', ${isDownload}, ${isComingSoon}, '${p.img}')" class="w-full py-2 bg-black hover:bg-black/80 text-white transition-colors font-bold text-sm rounded-xl flex items-center justify-center gap-2"><i class="fas fa-plus"></i> Add to Cart</button>`)}
                         </div>
                     </div>
                 </div>
@@ -547,44 +501,27 @@
             const viewLinks = document.getElementById('view-links');
             const viewShop = document.getElementById('view-shop');
             const shopTitle = document.getElementById('shop-title');
-
             currentCategory = targetCategory;
-            currentFilter = 'All'; // Reset filter on open
-
-            // Fade out links
+            currentFilter = 'All';
             viewLinks.classList.remove('view-active');
             viewLinks.classList.add('view-hidden');
-
             setTimeout(() => {
-                // Formatting title: make the dot orange
                 shopTitle.innerHTML = targetCategory.toUpperCase() + '<span class="text-brand-orange">.</span>';
-                
-                // Determine available sub-categories for filtering
-                let subCategories = [];
-                if (targetCategory === 'Store') {
-                    const storeItems = productsDB.filter(p => p.category !== 'Peng Wallpapers');
-                    subCategories = [...new Set(storeItems.map(p => p.category))];
-                }
-
-                renderFilters(subCategories);
+                renderFilters(targetCategory === 'Store' ? [...new Set(productsDB.filter(p => p.category !== 'Peng Wallpapers').map(p => p.category))] : []);
                 renderProducts();
-
-                // Scroll to top of shop container, not window
-                viewShop.scrollTop = 0;
+                window.scrollTo({ top: 0, behavior: 'instant' });
                 viewShop.classList.remove('view-hidden');
                 viewShop.classList.add('view-active');
-            }, 400); // Wait for fade out
+            }, 400);
         }
 
         function closeShop() {
             const viewLinks = document.getElementById('view-links');
             const viewShop = document.getElementById('view-shop');
-
             viewShop.classList.remove('view-active');
             viewShop.classList.add('view-hidden');
-
             setTimeout(() => {
-                viewShop.scrollTop = 0;
+                window.scrollTo({ top: 0, behavior: 'instant' });
                 viewLinks.classList.remove('view-hidden');
                 viewLinks.classList.add('view-active');
             }, 400);
